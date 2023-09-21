@@ -14,7 +14,8 @@ from CovidDeaths$  where location like'%india%' order by 1,2
 
 -- looking at countries with highest infection rate compared to population
 
-select location,population,max(total_cases) as highestinfectioncount,max((total_cases/population))*100 as percentpopulatedinfected from CovidDeaths$ group by location,
+select location,population,max(total_cases) as highestinfectioncount,max((total_cases/population))*100 as percentpopulatedinfected from 
+CovidDeaths$ group by location,
 population order by percentpopulatedinfected
 
 select location,max(cast(total_deaths as int)) CovidDeaths$ where location is not null 
@@ -42,7 +43,9 @@ select continent from CovidDeaths$
 
 -- global numbers
 
-select sum(new_cases) as total_cases,sum(cast(new_deaths as int)) as total_deaths,sum(cast(new_deaths as int))/sum(new_cases)*100 as deathpercentage -- new_cases,population,(total_cases/population)*100 as deathpercentage 
+select sum(new_cases) as total_cases,sum(cast(new_deaths as int)) as total_deaths,sum(cast(new_deaths as int))/sum(new_cases)*100 as deathpercentage 
+
+	-- new_cases,population,(total_cases/population)*100 as deathpercentage 
 from CovidDeaths$ where 
 continent is not null --group by date
 order by 1,2
